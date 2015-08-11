@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=”utf-8”>
+<title> Title of page </title>
+</head>
+<body>
+	<p> Select New Movie to Add to List of Interested In </p>
+	<form name="addinterested" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+		<table border="1">
+			<tr>
+				<th></th>
+				<th>Genre</th>
+				<th>Title</th>
+				<th>Year</th>
+			</tr>
+			<?php
+				while ($movie=$allMovies->fetch_assoc()) {
+					echo('<tr>
+							<td><input type="checkbox" name="formAddInterested[]" value="'.$movie['Title'].'|||'.$movie['Year'].'" /></td>
+							<td>'.$movie['Genre'].'</td>
+							<td>'.$movie['Title'].'</td>
+							<td>'.$movie['Year'].'</td>
+							<td><a href="moviedetails.php?
+								movie='.$movie['Title'].
+								'&year='.$movie['Year'].'" target="_blank">
+								View Movie Details</a>
+							</td>						
+						</tr>'
+					);
+				}
+			?>
+		</table>
+		<input type="submit" name="formSubmit" value="Done">
+	</form>
+	<a href="index.php">Main Menu</a>
+	<a href="addnewmovie.php">Don't see your movie?  Add it!</a>
+</body>
+</html>

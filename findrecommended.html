@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset=”utf-8”>
+<title> Recommended Movies </title>
+</head>
+<body>
+	<p>
+		<h1>Your Recommended Movies</h1>
+		<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+		By Actor
+		<select name="formSelectActor">
+			<option></option>
+			<?php
+				while ($actor=$allActors->fetch_assoc()) {
+					echo(
+						'<option>'.$actor['Name'].'</option>'
+					);
+				}
+			?>
+		</select>
+		<br>
+		&nbsp;&nbsp;and<br>
+		By Director
+		<select name="formSelectDirector">
+			<option></option>
+			<?php
+				while ($director=$allDirectors->fetch_assoc()) {
+					echo(
+						'<option>'.$director['Name'].'</option>'
+					);
+				}
+			?>
+		</select><br>
+		<input type="submit" name="formSubmit" value="Search Movies">
+		</form>
+		<?php
+			echo($selectActor.' '.$selectDirector.'<br>');
+		?>
+		<table border="1">
+		<?php
+			if(!empty($searchResults)){
+				$numFields=0;
+				
+				echo('<tr>');
+				while( $field = mysqli_fetch_field($searchResults) ){
+					$fields[$numFields] = $field->name;
+					echo('<th>'.$fields[$numFields].'</th>');
+					$numFields++;
+				}
+				echo('</tr>');
+				
+				while ($row=$searchResults->fetch_assoc()) {
+					echo('<tr>');
+					for ( $i = 0; $i < $numFields; $i++){
+						echo(
+								'<td>'.$row[$fields[$i]].'</td>'
+						);
+					}
+					echo('</tr>');
+				}
+			}
+			else{
+				echo("No results found.");
+			}
+		
+		?>
+		</table>
+		<a href="index.php">Main Menu</a>
+ </p>
+
+	
+</body>
+</html>

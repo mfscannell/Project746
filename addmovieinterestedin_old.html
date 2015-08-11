@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=”utf-8”>
+<title> Title of page </title>
+</head>
+<body>
+	<p> Select New Movie to Add to List of Interested In </p>
+	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+		<fieldset>
+			<ul>
+				<?php
+					include 'msma-amp_db_utilities.php';
+					$db_connection = connectDB();
+					$allMovies = getAllMovies($db_connection);
+					while ($movie=$allMovies->fetch_assoc()) {
+						echo("<li><input type=\"checkbox\" name=\"interested\" value=\"{$movie['Title']}\"> {$movie['Title']} </li>");
+					}
+				?>
+			</ul>
+			<input type="submit" name="clickDoneAddInterested" value="Done">
+		</fieldset>
+	</form>
+	
+</body>
+</html>

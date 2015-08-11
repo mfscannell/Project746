@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=”utf-8”>
+<title> Add New Movie </title>
+</head>
+<body>
+	<p> Add New Movie to AMP </p>
+	<form name="addmovie" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+		<table>
+		<tr>
+			<td>Movie Title</td>
+			<td><input type="text" name="formAddMovieTitle" maxlength="75"></td>
+			<td rowspan="4"><input type="submit" name="formSubmit" value="Add New Movie to Database" style="width:200px;height:200px"></td>
+		</tr>
+		<tr>
+			<td>Movie Year</td>
+			<td><select name="formAddMovieYear">
+				<?php
+					$thisYear=intval(date("Y"));
+					$minimumYear=1910;
+					echo('<option></option>');
+					while($thisYear>=$minimumYear){
+						echo('<option>'.$thisYear.'</option>');
+						$thisYear--;
+					}
+					
+				?>
+			</select></td>
+		</tr>
+		<tr>
+			<td>Genre</td>
+			<td><select name="formAddGenre">
+			<option></option>
+			<option>Action</option>
+			<option>Comedy</option>
+			<option>Romance</option>
+			<option>Western</option>
+			<option>Horror</option></td>
+		</select>
+		
+		
+		<tr><td width="150">
+			Select Actors
+			</td>
+			<td width="150">
+			Select Directors
+			</td>
+		</tr>
+		
+		<tr><td>
+		<select name="formAddActors[]" multiple="yes">
+			<?php
+				while ($actor=$allActors->fetch_assoc()) {
+					echo(
+						'<option>'.$actor['Name'].'</option>'
+					);
+				}
+				echo(
+					'</select><br><br>
+					Actors to Add <br>'
+				);
+				for ($i = 0; $i < 10; $i++){
+					echo('<input type="text" name="formTextAddActors[]" maxlength="50"></input><br>');
+				}
+			?>
+		</td>
+		<td><select name="formAddDirectors[]" multiple="yes">
+			<?php
+				while ($director=$allDirectors->fetch_assoc()) {
+					echo(
+						'<option>'.$director['Name'].'</option>'
+					);
+				}
+				echo(
+					'</select><br><br>
+					Directors to Add <br>'
+				);
+				for ($i = 0; $i < 10; $i++){
+					echo('<input type="text" name="formTextAddDirectors[]" maxlength="50"></input><br>');
+				}
+			?>
+		</td>
+		<td>
+			<a href="index.php">Main Menu</a>
+		</td>
+		</tr>
+		</table>
+		Movie Premise:<br>
+		<input type="text" name="formAddPremise" maxlength="500" style="width:250px; height:75px"></input></td>
+	</form>
+</body>
+</html>

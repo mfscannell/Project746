@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset=”utf-8”>
+<title> Movie Detail : <?php echo ($movie.' ('.$year.')') ?> </title>
+</head>
+<body>
+	<p>
+		<h1>Movie Detail : <?php echo $movie ?></h1>
+		<table border="1">
+		<tr>
+			<th>Genre</th>
+			<th>Avg Star Rating</th>
+		</tr>
+		<?php
+			while ($amovie=$movieDetail->fetch_assoc()) {
+				echo(
+					'<tr>
+						<td width="80">'.$amovie['Genre'].'</td>
+						<td width="150">'.$averageRating['averageRating'].'</td>
+					</tr>
+					<tr>
+						<td colspan="5">'.$amovie['Premise'].'<td>
+					</tr>
+					</table><br>'
+				);
+			}
+			echo(
+				'<table border="1"><tr>
+					<td colspan="2">Actors</td>
+					<td>Actor Role</td>
+				</tr>'
+			);
+			while ($anactor=$allMovieActors->fetch_assoc()) {
+				echo(
+					'<tr>
+						<td colspan="2">'.$anactor['ActorName'].'</td>
+						<td>'.$anactor['Role'].'</td>
+					</tr>'
+				);
+			}
+			echo(
+				'</table><br><table border="1"><tr>
+					<td>Directors</td>
+				</tr>'
+			);
+			while ($adirector=$allMovieDirectors->fetch_assoc()) {
+				echo(
+					'<tr>
+						<td>'.$adirector['DirectorName'].'</td>
+					</tr>'
+				);
+			}			
+		?>
+		</table>
+		<a href="index.php">Main Menu</a>
+ </p>
+
+	
+</body>
+</html>

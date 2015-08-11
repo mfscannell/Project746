@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=”utf-8”>
+<title> Title of page </title>
+</head>
+<body>
+	<p> Select New Movie to Add to List of Interested In </p>
+	<form action="<?php
+		if(isset($_POST['formSubmit'])) {
+			$addInterested = $_POST['formAddInterested'];
+			if(empty($addInterested)) {
+				echo("You didn't select any movies.");
+			} else {
+				$dbConnectionAdd = connectDB();
+				$N = count($addInterested);
+				echo("You selected $N movie(s): ");
+				for ($i = 0; $i < $N; $i++) {
+					echo($addInterested[$i] . " ");
+					//$movie = addInterested[$i]->fetch_assoc();
+					//$movieTitle = $movie['Title'];
+					//$movieYear = $movie['Year'];
+					$movieTitle = "Ghostbusters";//only for test
+					$movieYear = 1984;//only for test
+					$personName = "mfscannell";//only for test
+					addInterestedInMovie($dbConnectionAdd, $movieTitle, $movieYear, $personName);
+				}
+			}
+		}
+	?>" method="post">
+		<table border="1">
+			<tr>
+				<th></th>
+				<th>Genre</th>
+				<th>Title</th>
+				<th>Year</th>
+			</tr>
+			<?php
+				include 'msma-amp_db_utilities.php';
+				$db_connection = connectDB();
+				$allMovies = getAllMovies($db_connection);
+				while ($movie=$allMovies->fetch_assoc()) {
+					echo(
+						'<tr>
+							<td><input type="checkbox" name="formAddInterested[]" value="Yes" /></td>
+							<td>'.$movie['Genre'].'</td>
+							<td>'.$movie['Title'].'</td>
+							<td>'.$movie['Year'].'</td>
+						</tr>'
+					);
+				}
+			?>
+		</table>
+		<input type="submit" name="formSubmit" value="Done">
+	</form>
+	
+</body>
+</html>

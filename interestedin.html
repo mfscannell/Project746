@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=”utf-8”>
+<title> Movies of Interest to <?php echo $personName ?> </title>
+</head>
+<body>
+	<p>
+		<h1><?php echo $personName ?>'s Movies of Interest</h1>
+		<table border="1">
+		<tr>
+			<th>Genre</th>
+			<th>Title</th>
+			<th>Year</th>
+		</tr>
+		<?php
+			if(!empty($allInterested)){
+				while ($movie=$allInterested->fetch_assoc()) {
+					echo(
+						'<tr>
+							<td>'.$movie['Genre'].'</td>
+							<td>'.$movie['Title'].'</td>
+							<td>'.$movie['Year'].'</td>
+							<td><a href="moviedetails.php?
+								movie='.$movie['Title'].
+								'&year='.$movie['Year'].'" target="_blank">
+								View Movie Details</a>
+							</td>						
+						</tr>'
+					);
+				}
+			}
+		?>
+		</table>
+		<a href="index.php">Main Menu</a>
+ </p>
+
+	
+</body>
+</html>

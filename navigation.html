@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<!This form is the main navigation for AMP, with links to the core sections of the application.>
+<html>
+	<head>
+		<title>MSMA AMP Navigation</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td colspan="2">
+					<center>
+						<?php echo($_SESSION['person_name']);?>'s Awesome Movies
+					</center>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="watched.php" ><img border="0" src="./img/all_movies_watched_button.gif" alt="All Movies Watched"></a>
+				</td>
+				<td>
+					<a href="interestedin.php" ><img border="0" src="./img/all_movies_interested_in_button.gif" alt="All Movies Interested In"></a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="addmoviewatched.php" ><img border="0" src="./img/add_new_watched_movie_button.gif" alt="Add New Watched Movie"></a>
+				</td>
+				<td>
+					<a href="addmovieinterestedin.php" ><img border="0" src="./img/add_new_interested_in_movie.gif" alt="Add New Interested In Movie"></a>
+				</td>
+				</tr>
+			<tr>
+				<td colspan="2">
+					<center>
+						<a href="findrecommended.php" ><img border="0" src="./img/find_possibly_awesome_movies.gif" alt="Find Possibly Awesome Movies"></a>						
+					</center>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="logoff.php" >Log off</a>
+				</td>
+			</tr>
+	</body>
+</html>

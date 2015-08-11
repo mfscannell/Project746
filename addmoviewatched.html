@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=”utf-8”>
+<title> Title of page </title>
+</head>
+<body>
+	<p> Select New Movie to Add to Watched List</p>
+	<form name="addwatched" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+		<table border="1">
+			<tr>
+				<th></th>
+				<th>Genre</th>
+				<th>Title</th>
+				<th>Year</th>
+				<th>My Star Rating</th>
+			</tr>
+			<?php
+				$movienum = 0;
+				while ($movie=$allMovies->fetch_assoc()) {
+					echo(
+						'<tr>
+							<td><input type="checkbox" name="formAddWatched[]" value="'.$movie['Title'].'|||'.$movie['Year'].'" /></td>
+							<td>'.$movie['Genre'].'</td>
+							<td>'.$movie['Title'].'</td>
+							<td>'.$movie['Year'].'</td>
+							<td>
+								<select name="newstarrating'.$movienum.'">
+									<option value=""></option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</td>
+							<td><a href="moviedetails.php?
+								movie='.$movie['Title'].
+								'&year='.$movie['Year'].'" target="_blank">
+								View Movie Details</a>
+							</td>						
+						</tr>'
+					);
+				}
+			?>
+		</table>
+		<input type="submit" name="formSubmit" value="Done">
+	</form>
+	<a href="index.php">Main Menu</a>
+</body>
+</html>
